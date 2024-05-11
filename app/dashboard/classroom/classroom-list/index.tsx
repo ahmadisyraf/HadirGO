@@ -29,7 +29,7 @@ export default function Classroom() {
   const router = useRouter();
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR(
-    `/api/participant/${userid}`,
+    userid ? `/api/participant/${userid}` : null,
     fetcher
   );
 
