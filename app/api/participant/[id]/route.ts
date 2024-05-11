@@ -21,6 +21,7 @@ export async function POST(
   try {
     const getParticipant = await prisma.participant.findFirst({
       where: {
+        userId: id,
         classroom: {
           classcode: classcode,
         },

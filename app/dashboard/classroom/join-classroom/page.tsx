@@ -72,8 +72,7 @@ export default function CreateClassroom() {
       .catch((error) => {
         toast({
           title: "Oops! something wrong ⛔️",
-          description:
-            "We unable to find your class or you already joined the class",
+          description: error,
         });
       })
       .finally(() => {
