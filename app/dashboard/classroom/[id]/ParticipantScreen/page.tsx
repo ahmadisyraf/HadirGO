@@ -12,11 +12,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 
-export default function ParticipantScreen({
-  participants,
-}: {
-  participants: any;
-}) {
+export default function ParticipantScreen({ participants }: any) {
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center justify-between">
