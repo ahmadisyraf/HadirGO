@@ -46,7 +46,7 @@ export default function Classroom() {
           <JoinClassroom />
         </div>
       </div>
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
           {data?.map((d: any, index: number) => (
             <div key={index}>
