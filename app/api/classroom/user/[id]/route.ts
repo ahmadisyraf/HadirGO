@@ -9,12 +9,12 @@ export async function GET(
 ) {
   const id = params.id;
   if (!id) {
-    return NextResponse.json("Classroom id required", { status: 401 });
+    return NextResponse.json("User id required", { status: 401 });
   }
   try {
-    const fetchClassrooms = await prisma.classroom.findFirst({
+    const fetchClassrooms = await prisma.classroom.findMany({
       where: {
-        id,
+        userId: id,
       },
     });
 

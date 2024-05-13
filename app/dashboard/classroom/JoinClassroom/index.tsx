@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,14 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -36,6 +27,7 @@ import { useCookies } from "next-client-cookies";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   code: z.string().min(2, {
@@ -72,9 +64,8 @@ export default function JoinClassroom() {
           });
         } else {
           toast({
-            title: "Oops! something wrong ⛔️",
-            description:
-              "We unable to find your class or you already joined the class",
+            title: `${res.statusText} ⛔️`,
+            description: "We unable to join you to classroom",
           });
         }
       })
@@ -93,7 +84,9 @@ export default function JoinClassroom() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size={"sm"}>Join classroom</Button>
+        <Button variant="outline" size={"sm"}>
+          Join classroom
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -122,7 +115,14 @@ export default function JoinClassroom() {
                 )}
               />
               <Button type="submit" disabled={loading}>
-                Join
+                {loading ? (
+                  <>
+                    <LoaderCircle size={18} className="animate-spin mr-2" />
+                    <span>Joining</span>
+                  </>
+                ) : (
+                  "Join"
+                )}
               </Button>
             </form>
           </Form>

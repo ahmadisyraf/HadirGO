@@ -12,8 +12,6 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import { signOut } from "next-auth/react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -29,6 +27,7 @@ import useSWR from "swr";
 import { useAuth } from "@clerk/nextjs";
 import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({
   children,
@@ -39,6 +38,9 @@ export default function DashboardLayout({
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(userId ? "/api/user" : null, fetcher);
   const cookies = useCookies();
+  const pathname = usePathname();
+
+  console.log(pathname);
 
   useEffect(() => {
     if (data) {
@@ -54,19 +56,34 @@ export default function DashboardLayout({
             <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
               <Link href="/" className="flex items-center gap-2 font-semibold">
                 <Package2 className="h-6 w-6" />
-                <span className="">UMPSA Classroom</span>
+                <span className="">HadirGO</span>
               </Link>
             </div>
             <div className="flex-1">
               <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
                 <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  href="/dashboard/classroom"
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
+                    pathname.includes("classroom")
+                      ? ""
+                      : "text-muted-foreground"
+                  }  transition-all hover:text-primary`}
                 >
                   <Home className="h-4 w-4" />
                   Classroom
                 </Link>
                 <Link
+                  href="/dashboard/attendance"
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
+                    pathname.includes("attendance")
+                      ? ""
+                      : "text-muted-foreground"
+                  }  transition-all hover:text-primary`}
+                >
+                  <Users className="h-4 w-4" />
+                  Attendance
+                </Link>
+                {/* <Link
                   href="#"
                   className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                 >
@@ -96,7 +113,7 @@ export default function DashboardLayout({
                 >
                   <LineChart className="h-4 w-4" />
                   Analytics
-                </Link>
+                </Link> */}
               </nav>
             </div>
           </div>
@@ -124,13 +141,20 @@ export default function DashboardLayout({
                     <span className="sr-only">Acme Inc</span>
                   </Link>
                   <Link
-                    href="#"
+                    href="/dashboard/classroom"
                     className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                   >
                     <Home className="h-5 w-5" />
-                    Dashboard
+                    Classroom
                   </Link>
                   <Link
+                    href="/dashboard/attendance"
+                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  >
+                    <Users className="h-5 w-5" />
+                    Attendance
+                  </Link>
+                  {/* <Link
                     href="#"
                     className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
                   >
@@ -160,7 +184,7 @@ export default function DashboardLayout({
                   >
                     <LineChart className="h-5 w-5" />
                     Analytics
-                  </Link>
+                  </Link> */}
                 </nav>
               </SheetContent>
             </Sheet>

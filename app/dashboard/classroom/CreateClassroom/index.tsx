@@ -63,7 +63,6 @@ export default function CreateClassroom() {
     },
   });
 
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     await fetch("/api/classroom", {
@@ -181,7 +180,9 @@ export default function CreateClassroom() {
     // </main>
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" size={"sm"}>Create classroom</Button>
+        <Button variant="default" size={"sm"}>
+          Create classroom
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -240,7 +241,10 @@ export default function CreateClassroom() {
               />
               <Button type="submit" disabled={loading}>
                 {loading ? (
-                  <LoaderCircle size={18} className="animate-spin" />
+                  <>
+                    <LoaderCircle size={18} className="animate-spin mr-2" />
+                    <span>Submiting</span>
+                  </>
                 ) : (
                   "Submit"
                 )}

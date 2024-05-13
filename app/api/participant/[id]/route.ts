@@ -29,7 +29,10 @@ export async function POST(
     });
 
     if (getParticipant) {
-      return NextResponse.json("Already join the class", { status: 404 });
+      return NextResponse.json("Already join the class", {
+        status: 404,
+        statusText: "Already join the class",
+      });
     }
 
     const getClass = await prisma.classroom.findFirst({
@@ -37,6 +40,13 @@ export async function POST(
         classcode: classcode,
       },
     });
+
+    if (!getClass) {
+      return NextResponse.json("Classroom not exist", {
+        status: 404,
+        statusText: "Classroom not exist",
+      });
+    }
 
     const classid = getClass?.id;
 
