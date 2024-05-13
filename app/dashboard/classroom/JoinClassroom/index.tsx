@@ -108,7 +108,7 @@ export default function JoinClassroom() {
                   <FormItem>
                     <FormLabel>Classroom code</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Enter classroom code" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

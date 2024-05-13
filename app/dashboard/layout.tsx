@@ -5,6 +5,7 @@ import {
   CircleUser,
   Home,
   LineChart,
+  LogOut,
   Menu,
   Package,
   Package2,
@@ -28,6 +29,8 @@ import { useAuth } from "@clerk/nextjs";
 import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({
   children,
@@ -39,6 +42,8 @@ export default function DashboardLayout({
   const { data, error } = useSWR(userId ? "/api/user" : null, fetcher);
   const cookies = useCookies();
   const pathname = usePathname();
+  const { signOut } = useClerk();
+  const router = useRouter();
 
   console.log(pathname);
 
@@ -83,37 +88,6 @@ export default function DashboardLayout({
                   <Users className="h-4 w-4" />
                   Attendance
                 </Link>
-                {/* <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                >
-                  <Package className="h-4 w-4" />
-                  Products{" "}
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                >
-                  <Users className="h-4 w-4" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                >
-                  <LineChart className="h-4 w-4" />
-                  Analytics
-                </Link> */}
               </nav>
             </div>
           </div>
@@ -142,49 +116,26 @@ export default function DashboardLayout({
                   </Link>
                   <Link
                     href="/dashboard/classroom"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+                      pathname.includes("classroom")
+                        ? ""
+                        : "text-muted-foreground"
+                    } hover:text-foreground`}
                   >
                     <Home className="h-5 w-5" />
                     Classroom
                   </Link>
                   <Link
                     href="/dashboard/attendance"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                    className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+                      pathname.includes("attendance")
+                        ? ""
+                        : "text-muted-foreground"
+                    } hover:text-foreground`}
                   >
                     <Users className="h-5 w-5" />
                     Attendance
                   </Link>
-                  {/* <Link
-                    href="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                  >
-                    <ShoppingCart className="h-5 w-5" />
-                    Orders
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                      6
-                    </Badge>
-                  </Link>
-                  <Link
-                    href="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Package className="h-5 w-5" />
-                    Products
-                  </Link>
-                  <Link
-                    href="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Users className="h-5 w-5" />
-                    Customers
-                  </Link>
-                  <Link
-                    href="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <LineChart className="h-5 w-5" />
-                    Analytics
-                  </Link> */}
                 </nav>
               </SheetContent>
             </Sheet>
@@ -200,13 +151,14 @@ export default function DashboardLayout({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <SignOutButton>Logout</SignOutButton>
+                <DropdownMenuSeparator /> */}
+                <DropdownMenuItem onClick={() => signOut(() => router.push("/"))}>
+                  <LogOut size={18} className="mr-2" />
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -97,87 +97,6 @@ export default function CreateClassroom() {
   }
 
   return (
-    // <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-    //   <Breadcrumb>
-    //     <BreadcrumbList>
-    //       <BreadcrumbItem>
-    //         <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-    //       </BreadcrumbItem>
-    //       <BreadcrumbSeparator />
-    //       <BreadcrumbItem>
-    //         <BreadcrumbLink href="/components">Classroom</BreadcrumbLink>
-    //       </BreadcrumbItem>
-    //       <BreadcrumbSeparator />
-    //       <BreadcrumbItem>
-    //         <BreadcrumbPage>Create classroom</BreadcrumbPage>
-    //       </BreadcrumbItem>
-    //     </BreadcrumbList>
-    //   </Breadcrumb>
-    //   <div className="flex items-center justify-between">
-    //     <h1 className="text-lg font-semibold md:text-2xl">Create classroom</h1>
-    //   </div>
-    //   <Card
-    //     className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm px-5 md:px-10"
-    //     x-chunk="dashboard-02-chunk-1"
-    //   >
-    // <Form {...form}>
-    //   <form
-    //     onSubmit={form.handleSubmit(onSubmit)}
-    //     className="space-y-8 w-full"
-    //   >
-    //     <FormField
-    //       control={form.control}
-    //       name="classname"
-    //       render={({ field }) => (
-    //         <FormItem>
-    //           <FormLabel>Class name</FormLabel>
-    //           <FormControl>
-    //             <Input placeholder="shadcn" {...field} />
-    //           </FormControl>
-    //           <FormMessage />
-    //         </FormItem>
-    //       )}
-    //     />
-    //     <FormField
-    //       control={form.control}
-    //       name="section"
-    //       render={({ field }) => (
-    //         <FormItem>
-    //           <FormLabel>Section</FormLabel>
-    //           <FormControl>
-    //             <Input placeholder="shadcn" {...field} />
-    //           </FormControl>
-    //           {/* <FormDescription>
-    //             This is your public display name.
-    //           </FormDescription> */}
-    //           <FormMessage />
-    //         </FormItem>
-    //       )}
-    //     />
-    //     <FormField
-    //       control={form.control}
-    //       name="subject"
-    //       render={({ field }) => (
-    //         <FormItem>
-    //           <FormLabel>Subject</FormLabel>
-    //           <FormControl>
-    //             <Input placeholder="shadcn" {...field} />
-    //           </FormControl>
-    //           <FormMessage />
-    //         </FormItem>
-    //       )}
-    //     />
-    //     <Button type="submit" disabled={loading}>
-    //       {loading ? (
-    //         <LoaderCircle size={18} className="animate-spin" />
-    //       ) : (
-    //         "Submit"
-    //       )}
-    //     </Button>
-    //   </form>
-    // </Form>
-    //   </Card>
-    // </main>
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="default" size={"sm"}>
@@ -204,7 +123,7 @@ export default function CreateClassroom() {
                   <FormItem>
                     <FormLabel>Class name</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Enter classroom name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -217,7 +136,7 @@ export default function CreateClassroom() {
                   <FormItem>
                     <FormLabel>Section</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Enter section" {...field} />
                     </FormControl>
                     {/* <FormDescription>
                     This is your public display name.
@@ -233,7 +152,7 @@ export default function CreateClassroom() {
                   <FormItem>
                     <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Enter subject name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
