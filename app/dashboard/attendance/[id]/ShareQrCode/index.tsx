@@ -30,7 +30,7 @@ export default function ShareQrCode({ classid }: { classid: string }) {
         <div className="w-full relative flex flex-row items-center justify-center">
           <div className="border border-black p-5 rounded-lg">
             <QRCodeCanvas
-              value={`https://localhost:3000/attendance/${classid}`}
+              value={`https://hadir-go.vercel.app/attendance/${classid}`}
               width={"100%"}
               height={"100%"}
               size={300}
