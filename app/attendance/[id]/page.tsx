@@ -69,10 +69,9 @@ export default function Attendance({ params }: { params: { id: string } }) {
     <div className="px-5 md:px-20 h-dvh flex flex-row items-center justify-center shadow">
       <Card className="p-5 max-w-md">
         <p className="text-lg font-semibold">Attend {data.classname}?</p>
-        <p className="text-md text-gray-500">
+        <p className="text-sm text-gray-500">
           Please click proceed to fill in attendance of your class
         </p>
-        {/* <p>{params.id}</p> */}
         <div className="flex flex-row-reverse items-center mt-5">
           <Button
             variant={"default"}
@@ -88,7 +87,12 @@ export default function Attendance({ params }: { params: { id: string } }) {
               "Proceed"
             )}
           </Button>
-          <Button variant={"outline"} size={"sm"} className="mr-2">
+          <Button
+            variant={"outline"}
+            size={"sm"}
+            className="mr-2"
+            onClick={() => router.push("/dashboard")}
+          >
             Go back
           </Button>
         </div>

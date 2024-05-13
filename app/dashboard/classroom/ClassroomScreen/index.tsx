@@ -1,9 +1,7 @@
 "use client";
 
-import { Check, Copy, LoaderCircle, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Check, Copy } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { useCookies } from "next-client-cookies";
 import JoinClassroom from "../JoinClassroom";
 import CreateClassroom from "../CreateClassroom";
 import Link from "next/link";
@@ -31,11 +29,9 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
           {classrooms.map((d: any, index: number) => (
             <div key={index}>
               <Link href={`/dashboard/classroom/${d.id}`}>
-                <Card className="p-5 text-left space-y-3 w-full">
+                <Card className="p-5 text-left space-y-3 w-full relative">
                   <div className="space-y-1">
-                    <p className="font-semibold text-lg">
-                      {d.classname}
-                    </p>
+                    <p className="font-semibold text-lg">{d.classname}</p>
                     <p className="font-medium">{d.subject}</p>
                     <p className="text-sm">Section {d.section}</p>
                   </div>
@@ -58,9 +54,7 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
                     </Button>
                     <div>
                       <p className="font-medium text-sm">Share this code:</p>
-                      <p className="font-semibold text-lg">
-                        {d.classcode}
-                      </p>
+                      <p className="font-semibold text-lg">{d.classcode}</p>
                     </div>
                   </div>
                 </Card>

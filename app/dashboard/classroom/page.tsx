@@ -2,10 +2,13 @@ import { cookies } from "next/headers";
 import ClassroomScreen from "./ClassroomScreen";
 
 export const revalidate = 0;
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function getClassrooms(userId: string | undefined) {
-  const response = await fetch(`${baseUrl}/api/classroom/user/${userId}`);
+  const response = await fetch(`${baseUrl}/api/classroom/user/${userId}`, {
+    method: "GET",
+  });
 
   if (!response.ok) {
     throw new Error("Something wrong");

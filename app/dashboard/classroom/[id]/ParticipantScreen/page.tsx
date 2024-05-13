@@ -9,8 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import DeleteClassroom from "./DeleteClassroom";
 
 export default function ParticipantScreen({ participants }: any) {
   return (
@@ -21,10 +20,7 @@ export default function ParticipantScreen({ participants }: any) {
         </h1>
       </div>
       <div className="flex flex-row-reverse">
-        <Button variant={"destructive"} size={"sm"}>
-          <Trash2 size={18} className="mr-2" />
-          Delete classroom
-        </Button>
+        <DeleteClassroom classroomId={participants[0].classroom.id} />
       </div>
       <Card>
         <Table>

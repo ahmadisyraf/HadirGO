@@ -1,13 +1,6 @@
 "use client";
 import Link from "next/link";
-import {
-  CircleUser,
-  Home,
-  LogOut,
-  Menu,
-  Package2,
-  Users,
-} from "lucide-react";
+import { CircleUser, History, Home, LogOut, Menu, Package2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -80,6 +73,17 @@ export default function DashboardLayout({
                   <Users className="h-4 w-4" />
                   Attendance
                 </Link>
+                <Link
+                  href="/dashboard/history"
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
+                    pathname.includes("history")
+                      ? ""
+                      : "text-muted-foreground"
+                  }  transition-all hover:text-primary`}
+                >
+                  <History className="h-4 w-4" />
+                  History
+                </Link>
               </nav>
             </div>
           </div>
@@ -148,7 +152,9 @@ export default function DashboardLayout({
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>
                 <DropdownMenuSeparator /> */}
-                <DropdownMenuItem onClick={() => signOut(() => router.push("/"))}>
+                <DropdownMenuItem
+                  onClick={() => signOut(() => router.push("/"))}
+                >
                   <LogOut size={18} className="mr-2" />
                   Logout
                 </DropdownMenuItem>

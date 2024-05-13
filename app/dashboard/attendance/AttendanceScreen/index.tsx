@@ -1,12 +1,11 @@
 "use client";
-import useSWR from "swr";
-import { useCookies } from "next-client-cookies";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LoaderCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AttendanceScreen({ classrooms }: any) {
+  const router = useRouter();
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center justify-between">
@@ -23,6 +22,16 @@ export default function AttendanceScreen({ classrooms }: any) {
                     <p className="font-medium">{d.subject}</p>
                     <p className="text-sm">Section {d.section}</p>
                   </div>
+                  <Button
+                    size={"sm"}
+                    variant={"outline"}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push(`/attendance/${d.id}`);
+                    }}
+                  >
+                    Fill an attendance
+                  </Button>
                 </Card>
               </Link>
             </div>

@@ -23,3 +23,38 @@ export async function GET(
     return NextResponse.json(error, { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const classroomId = params.id;
+
+  if (!classroomId) {
+    return NextResponse.json("Class id required", { status: 401 });
+  }
+
+  try {
+    const deleteAttendance = await prisma.attendance.deleteMany({
+      where: {
+        classroomId,
+      },
+    });
+    
+    const deleteParticipant = await prisma.participant.deleteMany({
+      where: {
+        classroomId,
+      },
+    });
+
+    const deleteClassroom = await prisma.classroom.delete({
+      where: {
+        id: classroomId,
+      },
+    });
+
+    return NextResponse.json(deleteClassroom, { status: 200 });
+  } catch (error) {
+    return NextResponse.json("Something wrong", { status: 500 });
+  }
+}
