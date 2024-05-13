@@ -7,14 +7,14 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
-  if (!id) {
+  const userId = params.id;
+  if (!userId) {
     return NextResponse.json("User id required", { status: 401 });
   }
   try {
     const fetchClassrooms = await prisma.classroom.findMany({
       where: {
-        userId: id,
+        userId,
       },
     });
 

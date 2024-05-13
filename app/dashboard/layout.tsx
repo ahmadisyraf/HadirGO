@@ -1,16 +1,11 @@
 "use client";
 import Link from "next/link";
 import {
-  Bell,
   CircleUser,
   Home,
-  LineChart,
   LogOut,
   Menu,
-  Package,
   Package2,
-  Search,
-  ShoppingCart,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,12 +13,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { SignOutButton } from "@clerk/nextjs";
 import useSWR from "swr";
 import { useAuth } from "@clerk/nextjs";
 import { useCookies } from "next-client-cookies";
