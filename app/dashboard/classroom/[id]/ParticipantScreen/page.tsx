@@ -12,15 +12,16 @@ import { Card } from "@/components/ui/card";
 import DeleteClassroom from "./DeleteClassroom";
 
 export default function ParticipantScreen({ participants }: any) {
+  console.log(participants);
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">
-          {participants[0].classroom.classname}
+          {participants[0]?.classroom.classname}
         </h1>
       </div>
       <div className="flex flex-row-reverse">
-        <DeleteClassroom classroomId={participants[0].classroom.id} />
+        <DeleteClassroom classroomId={participants[0]?.classroom.id} />
       </div>
       <Card>
         <Table>

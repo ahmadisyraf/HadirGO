@@ -87,7 +87,12 @@ export async function GET(
         userId: id,
       },
       include: {
-        classroom: true,
+        user: true,
+        classroom: {
+          include: {
+            Attendance: true,
+          },
+        },
       },
     });
 

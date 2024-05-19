@@ -1,6 +1,14 @@
 "use client";
 import Link from "next/link";
-import { CircleUser, History, Home, LogOut, Menu, Package2, Users } from "lucide-react";
+import {
+  CircleUser,
+  History,
+  Home,
+  LogOut,
+  Menu,
+  Package2,
+  Users,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import useSWR from "swr";
-import { useAuth } from "@clerk/nextjs";
+import { SignOutButton, useAuth } from "@clerk/nextjs";
 import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -76,9 +84,7 @@ export default function DashboardLayout({
                 <Link
                   href="/dashboard/history"
                   className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
-                    pathname.includes("history")
-                      ? ""
-                      : "text-muted-foreground"
+                    pathname.includes("history") ? "" : "text-muted-foreground"
                   }  transition-all hover:text-primary`}
                 >
                   <History className="h-4 w-4" />
@@ -135,31 +141,9 @@ export default function DashboardLayout({
                 </nav>
               </SheetContent>
             </Sheet>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="rounded-full"
-                >
-                  <CircleUser className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator /> */}
-                <DropdownMenuItem
-                  onClick={() => signOut(() => router.push("/"))}
-                >
-                  <LogOut size={18} className="mr-2" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <SignOutButton redirectUrl="/">
+              <Button size={"sm"}>Sign out</Button>
+            </SignOutButton>
           </header>
           {children}
         </div>

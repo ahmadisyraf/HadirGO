@@ -65,7 +65,6 @@ export default function CreateClassroom() {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log(data);
         if (!res.ok) {
           toast({
             title: "Oops! something wrong ⛔️",

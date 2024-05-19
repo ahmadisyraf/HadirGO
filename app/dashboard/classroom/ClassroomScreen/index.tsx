@@ -28,12 +28,12 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
           {classrooms.map((d: any, index: number) => (
             <div key={index}>
-              <Link href={`/dashboard/classroom/${d.id}`}>
+              <Link href={`/dashboard/classroom/${d.classroom.id}`}>
                 <Card className="p-5 text-left space-y-3 w-full relative">
                   <div className="space-y-1">
-                    <p className="font-semibold text-lg">{d.classname}</p>
-                    <p className="font-medium">{d.subject}</p>
-                    <p className="text-sm">Section {d.section}</p>
+                    <p className="font-semibold text-lg">{d.classroom.classname}</p>
+                    <p className="font-medium">{d.classroom.subject}</p>
+                    <p className="text-sm">Section {d.classroom.section}</p>
                   </div>
                   <div className="border border-dashed rounded-lg p-3 relative flex flex-row items-center justify-between">
                     <Button
@@ -42,11 +42,11 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
                       className="absolute top-2 right-2 h-[30px] w-[30px]"
                       onClick={(e) => {
                         e.preventDefault();
-                        navigator.clipboard.writeText(d.classcode);
-                        setCopied(d.classcode);
+                        navigator.clipboard.writeText(d.classroom.classcode);
+                        setCopied(d.classroom.classcode);
                       }}
                     >
-                      {d.classcode == copied ? (
+                      {d.classroom.classcode == copied ? (
                         <Check size={15} />
                       ) : (
                         <Copy size={15} />
@@ -54,7 +54,7 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
                     </Button>
                     <div>
                       <p className="font-medium text-sm">Share this code:</p>
-                      <p className="font-semibold text-lg">{d.classcode}</p>
+                      <p className="font-semibold text-lg">{d.classroom.classcode}</p>
                     </div>
                   </div>
                 </Card>

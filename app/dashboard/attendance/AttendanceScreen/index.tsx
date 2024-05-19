@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function AttendanceScreen({ classrooms }: any) {
+
+  console.log(classrooms);
   const router = useRouter();
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
@@ -15,19 +17,21 @@ export default function AttendanceScreen({ classrooms }: any) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
           {classrooms?.map((d: any, index: number) => (
             <div key={index}>
-              <Link href={`/dashboard/attendance/${d.id}`}>
+              <Link href={`/dashboard/attendance/${d.classroom.id}`}>
                 <Card className="p-5 text-left space-y-3 w-full">
                   <div className="space-y-1">
-                    <p className="font-semibold text-lg">{d.classname}</p>
-                    <p className="font-medium">{d.subject}</p>
-                    <p className="text-sm">Section {d.section}</p>
+                    <p className="font-semibold text-lg">
+                      {d.classroom.classname}
+                    </p>
+                    <p className="font-medium">{d.classroom.subject}</p>
+                    <p className="text-sm">Section {d.classroom.section}</p>
                   </div>
                   <Button
                     size={"sm"}
-                    variant={"outline"}
+                    variant={"default"}
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push(`/attendance/${d.id}`);
+                      router.push(`/attendance/${d.classroom.id}`);
                     }}
                   >
                     Fill an attendance

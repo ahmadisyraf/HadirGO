@@ -6,7 +6,14 @@ export const revalidate = 0;
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function getClassrooms(userId: string | undefined) {
-  const response = await fetch(`${baseUrl}/api/classroom/user/${userId}`, {
+  // const response = await fetch(`${baseUrl}/api/classroom/user/${userId}`, {
+  //   method: "GET",
+  //   next: {
+  //     revalidate: 0,
+  //   },
+  // });
+
+  const response = await fetch(`${baseUrl}/api/participant/${userId}`, {
     method: "GET",
   });
 
