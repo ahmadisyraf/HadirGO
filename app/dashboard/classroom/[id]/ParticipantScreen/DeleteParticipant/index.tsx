@@ -10,26 +10,20 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Trash } from "lucide-react";
 import { useCookies } from "next-client-cookies";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
-export default function DeleteClassroom({
-  classroomId,
-}: {
-  classroomId: string;
-}) {
+export function DeleteParticipant({ classroomId, userId }: any) {
   const { toast } = useToast();
-  const cookies = useCookies();
-  const userId = cookies.get("userId");
   const router = useRouter();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant={"destructive"} size={"sm"}>
-          <Trash2 size={18} className="mr-2" />
-          Delete classroom
+        <Button variant="outline" size={"icon"}>
+          <Trash size={18} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -44,7 +38,7 @@ export default function DeleteClassroom({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={async () => {
-              await fetch(`/api/classroom/${classroomId}`, {
+              await fetch(`/api/participant/${classroomId}`, {
                 method: "DELETE",
                 body: JSON.stringify({
                   userId,
@@ -56,7 +50,7 @@ export default function DeleteClassroom({
                 .then((res) => {
                   if (res.ok) {
                     toast({
-                      title: "Classroom deleted 🎉",
+                      title: "User kicked 🎉",
                       description: "Classroom has been deleted",
                     });
                   } else {
@@ -75,7 +69,7 @@ export default function DeleteClassroom({
                 .finally(() => router.push("/dashboard"));
             }}
           >
-            Delete
+            Confirm
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

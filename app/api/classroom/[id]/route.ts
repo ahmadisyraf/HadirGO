@@ -29,18 +29,33 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const classroomId = params.id;
+  const { userId } = await request.json();
 
   if (!classroomId) {
     return NextResponse.json("Class id required", { status: 401 });
   }
 
   try {
+    const isOwner = await prisma.classroom.findFirst({
+      where: {
+        userId,
+        id: classroomId,
+      },
+    });
+
+    if (!isOwner) {
+      return NextResponse.json("Only instructor can delete classroom", {
+        status: 400,
+        statusText: "Only instructor can delete classroom",
+      });
+    }
+    
     const deleteAttendance = await prisma.attendance.deleteMany({
       where: {
         classroomId,
       },
     });
-    
+
     const deleteParticipant = await prisma.participant.deleteMany({
       where: {
         classroomId,

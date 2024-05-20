@@ -1,4 +1,4 @@
-import ParticipantScreen from "./ParticipantScreen/page";
+import ParticipantScreen from "./ParticipantScreen";
 
 export const revalidate = 0;
 

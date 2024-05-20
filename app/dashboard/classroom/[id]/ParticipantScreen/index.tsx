@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
 import DeleteClassroom from "./DeleteClassroom";
+import { DeleteParticipant } from "./DeleteParticipant";
 
 export default function ParticipantScreen({ participants }: any) {
-  console.log(participants);
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center justify-between">
@@ -27,9 +27,10 @@ export default function ParticipantScreen({ participants }: any) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Name</TableHead>
-              <TableHead className="w-[100px]">Email</TableHead>
-              <TableHead className="w-[100px]">Join Date</TableHead>
+              <TableHead className="">Name</TableHead>
+              <TableHead className="">Email</TableHead>
+              <TableHead className="">Join Date</TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -40,6 +41,12 @@ export default function ParticipantScreen({ participants }: any) {
                 </TableCell>
                 <TableCell className="font-medium">{d.user.email}</TableCell>
                 <TableCell className="font-medium">{d.createdAt}</TableCell>
+                <TableCell>
+                  <DeleteParticipant
+                    classroomId={d.classroom.id}
+                    userId={d.user.id}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

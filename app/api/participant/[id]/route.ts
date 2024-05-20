@@ -91,7 +91,7 @@ export async function GET(
         classroom: {
           include: {
             user: true,
-            Attendance: true
+            Attendance: true,
           },
         },
       },
@@ -99,6 +99,52 @@ export async function GET(
 
     return NextResponse.json(getClassrooms, { status: 200 });
   } catch (error) {
+    return NextResponse.json(error, { status: 500 });
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const classroomId = params.id;
+  const { userId } = await request.json();
+
+  if (!userId) {
+    return NextResponse.json({ error: "User id required" }, { status: 401 });
+  }
+
+  if (!classroomId) {
+    return NextResponse.json(
+      { error: "Classroom id required" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const isOwner = await prisma.classroom.findFirst({
+      where: {
+        id: classroomId,
+        userId,
+      },
+    });
+
+    if (!isOwner) {
+      return NextResponse.json("Only instructor can kick student", {
+        status: 400,
+        statusText: "Only instructor can kick student",
+      });
+    }
+    const deleteUser = await prisma.participant.deleteMany({
+      where: {
+        userId,
+        classroomId,
+      },
+    });
+
+    return NextResponse.json(deleteUser, { status: 200 });
+  } catch (error) {
+    console.error(error);
     return NextResponse.json(error, { status: 500 });
   }
 }
