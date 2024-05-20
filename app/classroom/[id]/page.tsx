@@ -12,13 +12,11 @@ import { useRouter } from "next/navigation";
 export default function Attendance({ params }: { params: { id: string } }) {
   const classcode = params.id;
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
-  const { data, error, isLoading } = useSWR(
-    `/api/classroom/${params.id}`,
-    fetcher
-  );
+
   const router = useRouter();
   const cookies = useCookies();
   const userId = cookies.get("userId");
+
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -55,21 +53,10 @@ export default function Attendance({ params }: { params: { id: string } }) {
       });
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-row items-center justify-center h-dvh w-full">
-        <div className="text-center flex flex-col items-center justify-center">
-          <LoaderCircle size={30} className="animate-spin" />
-          <p>Fetching data, please wait...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="px-5 md:px-20 h-dvh flex flex-row items-center justify-center shadow">
       <Card className="p-5 max-w-md">
-        <p className="text-lg font-semibold">Join {data.classname}?</p>
+        <p className="text-lg font-semibold">Join classroom?</p>
         <p className="text-sm text-gray-500">
           Please click proceed to join classroom.
         </p>
