@@ -24,7 +24,7 @@ export default function ShareQrCode({ classcode }: { classcode: string }) {
         <DialogHeader>
           <DialogTitle>Share attendance QR Code</DialogTitle>
           <DialogDescription>
-            Share Attendance QR Code to record your student attendance.
+            Share Attendance QR Code to let your student join classroom.
           </DialogDescription>
         </DialogHeader>
         <div className="w-full relative flex flex-row items-center justify-center">
