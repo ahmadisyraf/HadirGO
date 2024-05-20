@@ -11,6 +11,7 @@ import {
 import { Card } from "@/components/ui/card";
 import DeleteClassroom from "./DeleteClassroom";
 import { DeleteParticipant } from "./DeleteParticipant";
+import ShareQrCode from "./ShareQrCode";
 
 export default function ParticipantScreen({ participants }: any) {
   return (
@@ -22,6 +23,7 @@ export default function ParticipantScreen({ participants }: any) {
       </div>
       <div className="flex flex-row-reverse">
         <DeleteClassroom classroomId={participants[0]?.classroom.id} />
+        <ShareQrCode classcode={participants[0]?.classroom.classcode} />
       </div>
       <Card>
         <Table>

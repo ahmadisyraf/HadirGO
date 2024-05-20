@@ -110,7 +110,7 @@ export async function DELETE(
   const classroomId = params.id;
   const { userId, deleteUserId } = await request.json();
 
-  if (!userId) {
+  if (!userId || !deleteUserId) {
     return NextResponse.json({ error: "User id required" }, { status: 401 });
   }
 
@@ -137,7 +137,7 @@ export async function DELETE(
     }
     const deleteUser = await prisma.participant.deleteMany({
       where: {
-        userId,
+        userId: deleteUserId,
         classroomId,
       },
     });
