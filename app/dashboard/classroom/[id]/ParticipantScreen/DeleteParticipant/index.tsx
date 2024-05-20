@@ -15,8 +15,10 @@ import { useCookies } from "next-client-cookies";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
-export function DeleteParticipant({ classroomId, userId }: any) {
+export function DeleteParticipant({ classroomId, deleteUserId }: any) {
   const { toast } = useToast();
+  const cookies = useCookies();
+  const userId = cookies.get("userId");
   const router = useRouter();
 
   return (
@@ -42,6 +44,7 @@ export function DeleteParticipant({ classroomId, userId }: any) {
                 method: "DELETE",
                 body: JSON.stringify({
                   userId,
+                  deleteUserId,
                 }),
                 next: {
                   revalidate: 0,

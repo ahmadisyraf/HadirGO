@@ -44,7 +44,7 @@ export default function ParticipantScreen({ participants }: any) {
                 <TableCell>
                   <DeleteParticipant
                     classroomId={d.classroom.id}
-                    userId={d.user.id}
+                    deleteUserId={d.user.id}
                   />
                 </TableCell>
               </TableRow>

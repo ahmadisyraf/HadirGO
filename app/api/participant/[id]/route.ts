@@ -108,7 +108,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const classroomId = params.id;
-  const { userId } = await request.json();
+  const { userId, deleteUserId } = await request.json();
 
   if (!userId) {
     return NextResponse.json({ error: "User id required" }, { status: 401 });
