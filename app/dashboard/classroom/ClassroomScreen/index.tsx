@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import JoinClassroom from "../JoinClassroom";
 import CreateClassroom from "../CreateClassroom";
@@ -31,7 +31,9 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
               <Link href={`/dashboard/classroom/${d.classroom.id}`}>
                 <Card className="p-5 text-left space-y-3 w-full relative">
                   <div className="space-y-1">
-                    <p className="font-semibold text-lg">{d.classroom.classname}</p>
+                    <p className="font-semibold text-lg">
+                      {d.classroom.classname}
+                    </p>
                     <p className="font-medium">{d.classroom.subject}</p>
                     <p className="text-sm">Section {d.classroom.section}</p>
                   </div>
@@ -54,9 +56,15 @@ export default function ClassroomScreen({ classrooms }: { classrooms: any }) {
                     </Button>
                     <div>
                       <p className="font-medium text-sm">Share this code:</p>
-                      <p className="font-semibold text-lg">{d.classroom.classcode}</p>
+                      <p className="font-semibold text-lg">
+                        {d.classroom.classcode}
+                      </p>
                     </div>
                   </div>
+                  <ExternalLink
+                    className="absolute top-2 right-5 z-50"
+                    size={18}
+                  />
                 </Card>
               </Link>
             </div>

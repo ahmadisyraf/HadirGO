@@ -90,7 +90,8 @@ export async function GET(
         user: true,
         classroom: {
           include: {
-            Attendance: true,
+            user: true,
+            Attendance: true
           },
         },
       },

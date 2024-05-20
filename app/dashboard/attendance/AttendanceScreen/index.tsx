@@ -3,9 +3,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ExternalLink } from "lucide-react";
 
 export default function AttendanceScreen({ classrooms }: any) {
-
   console.log(classrooms);
   const router = useRouter();
   return (
@@ -18,7 +18,7 @@ export default function AttendanceScreen({ classrooms }: any) {
           {classrooms?.map((d: any, index: number) => (
             <div key={index}>
               <Link href={`/dashboard/attendance/${d.classroom.id}`}>
-                <Card className="p-5 text-left space-y-3 w-full">
+                <Card className="p-5 text-left space-y-3 w-full relative">
                   <div className="space-y-1">
                     <p className="font-semibold text-lg">
                       {d.classroom.classname}
@@ -36,6 +36,7 @@ export default function AttendanceScreen({ classrooms }: any) {
                   >
                     Fill an attendance
                   </Button>
+                  <ExternalLink className="absolute top-2 right-5 z-50" size={18} />
                 </Card>
               </Link>
             </div>

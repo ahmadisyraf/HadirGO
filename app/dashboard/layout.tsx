@@ -142,7 +142,9 @@ export default function DashboardLayout({
               </SheetContent>
             </Sheet>
             <SignOutButton redirectUrl="/">
-              <Button size={"sm"}>Sign out</Button>
+              <Button variant={"outline"} size={"icon"}>
+                <LogOut size={18} />
+              </Button>
             </SignOutButton>
           </header>
           {children}
