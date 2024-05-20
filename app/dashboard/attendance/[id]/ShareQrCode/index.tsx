@@ -12,6 +12,8 @@ import { QrCode } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 
 export default function ShareQrCode({ classid }: { classid: string }) {
+
+  console.log(classid);
   return (
     <Dialog>
       <DialogTrigger asChild>

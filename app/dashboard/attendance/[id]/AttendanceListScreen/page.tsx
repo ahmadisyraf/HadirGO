@@ -12,11 +12,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import { LoaderCircle, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ShareQrCode from "../ShareQrCode";
+import ReportDialog from "../ReportDialog";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default function AttendanceListScren({ attendance }: any) {
+export default function AttendanceListScren({ attendance, classId }: any) {
   if (attendance && attendance.length <= 0) {
     return (
       <div className="flex flex-row items-center justify-center h-dvh w-full">
@@ -25,6 +26,8 @@ export default function AttendanceListScren({ attendance }: any) {
     );
   }
 
+  console.log(attendance);
+
   return (
     <main className="flex flex-col p-4 lg:p-6">
       <div className="flex items-center justify-between">
@@ -32,8 +35,14 @@ export default function AttendanceListScren({ attendance }: any) {
           {attendance[0].classroom.classname} Attendance
         </h1>
       </div>
-      <div className="flex flex-row-reverse">
-        <ShareQrCode classid={attendance.classroomId} />
+      <div className="flex flex-row-reverse space-x-2">
+        {/* <ReportDialog classroomId={classId} /> */}
+        <Link href={`/dashboard/analytic/${attendance[0].classroom.id}`}>
+          <Button size={"sm"} variant={"outline"} className="ml-2">
+            See analytics
+          </Button>
+        </Link>
+        <ShareQrCode classid={classId} />
       </div>
 
       <Card className="w-full relative mt-5">

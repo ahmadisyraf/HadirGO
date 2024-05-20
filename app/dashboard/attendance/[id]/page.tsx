@@ -22,5 +22,5 @@ export default async function Classroom({
 
   const attendance = await getAttendance(classId);
 
-  return <AttendanceListScren attendance={attendance} />
+  return <AttendanceListScren attendance={attendance} classId={classId} />;
 }

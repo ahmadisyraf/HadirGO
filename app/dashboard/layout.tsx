@@ -7,15 +7,10 @@ import {
   LogOut,
   Menu,
   Package2,
+  User,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import useSWR from "swr";
 import { SignOutButton, useAuth } from "@clerk/nextjs";
@@ -89,6 +84,15 @@ export default function DashboardLayout({
                 >
                   <History className="h-4 w-4" />
                   History
+                </Link>
+                <Link
+                  href="/dashboard/profile"
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
+                    pathname.includes("profile") ? "" : "text-muted-foreground"
+                  }  transition-all hover:text-primary`}
+                >
+                  <User className="h-4 w-4" />
+                  Profile
                 </Link>
               </nav>
             </div>
