@@ -2,18 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { PrismaClient } from "@prisma/client";
-import React from "react";
+import React, { useRef } from "react";
 import {
   BarChart,
   Bar,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
 import useSWR from "swr";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -29,7 +29,20 @@ export default function Analytic({ params }: { params: { id: string } }) {
     fetcher
   );
 
-  console.log(data);
+  const printRef = useRef<HTMLDivElement>(null);
+
+  const generatePDF = async () => {
+    const element = printRef.current;
+    if (!element) return; // Ensure the element is not null
+    const canvas = await html2canvas(element);
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("analytics.pdf");
+  };
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
@@ -44,7 +57,7 @@ export default function Analytic({ params }: { params: { id: string } }) {
         {/* Assuming totalStudents is available in your data */}
         <p className="text-4xl font-semibold">{totalUser}</p>
       </Card>
-      <Card className="p-3">
+      <Card className="p-3" ref={printRef}>
         <ResponsiveContainer width="100%" height={500}>
           <BarChart
             width={500}
@@ -65,6 +78,7 @@ export default function Analytic({ params }: { params: { id: string } }) {
           </BarChart>
         </ResponsiveContainer>
       </Card>
+      <Button onClick={generatePDF}>Generate PDF</Button>
     </main>
   );
 }

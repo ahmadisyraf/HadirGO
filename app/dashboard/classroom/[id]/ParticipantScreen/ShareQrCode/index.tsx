@@ -22,7 +22,7 @@ export default function ShareQrCode({ classcode }: { classcode: string }) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Share attendance QR Code</DialogTitle>
+          <DialogTitle>Join classroom via QR Code</DialogTitle>
           <DialogDescription>
             Share Attendance QR Code to let your student join classroom.
           </DialogDescription>
